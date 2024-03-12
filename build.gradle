@@ -24,6 +24,8 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+    implementation 'org.postgresql:r2dbc-postgresql'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -31,9 +33,11 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.projectreactor:reactor-test'
     testImplementation 'org.springframework.security:spring-security-test'
-    // https://mvnrepository.com/artifact/io.r2dbc/r2dbc-postgresql
-    implementation group: 'io.r2dbc', name: 'r2dbc-postgresql', version: '0.8.13.RELEASE'
-    implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+
+    // org.gradle.internal.resolve.ArtifactNotFoundException: Could not find snakeyaml-2.2-android.jar (org.yaml:snakeyaml:2.2).
+    implementation ('com.github.javafaker:javafaker:1.0.2') { exclude module: 'snakeyaml' }
+    implementation 'org.yaml:snakeyaml:2.2'
+
 }
 
 tasks.named('test') {
